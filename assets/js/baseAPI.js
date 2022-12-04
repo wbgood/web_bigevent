@@ -3,6 +3,21 @@
 // 在这个函数中，可以拿到我们给Ajax提供的配置对象
 $.ajaxPrefilter(function(options) {
     // 在发起真正的 Ajax 请求之前，统一拼接请求的根路径
-    console.log(options);
-    options.url = 'http://ajax.frontend.itheima.net' + options.url
+    // options.url = 'http://www.liulongbin.top:3007' + options.url
+
+    // 本地走网关
+    // options.url = '127.0.0.1:8782/bigevent/' + options.url
+
+    // options.url = '127.0.0.1:8781' + options.url
+    options.headers = {
+      'Content-Type': 'application/json'
+    }
+
+    if (options.url.indexOf('/my/') !== -1) {
+      options.headers = {
+        Authorization: localStorage.getItem('token') || ''
+      }
+    }
+
+  
   })

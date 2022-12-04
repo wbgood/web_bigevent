@@ -40,21 +40,22 @@ $(function () {
 
         // 获取注册名与密码
         var data = {
-            username: $('#form_reg [name="username"').val(),
+            userName: $('#form_reg [name="username"').val(),
             password: $('#form_reg [name="password"]').val()
         }
-        // console.log(data);
+        console.log(data);
         // 发起请求
-        $.post('http://www.liulongbin.top:3007/api/reguser', data, function (reg) {
+        // $.post('/api/reguser', data, function (reg) {
+        $.post('http://127.0.0.1:8782/bigevent/auth/reg/userName', data, function (reg) {
             // console.log(reg);
-            if (reg.status !== 0) {
+            /* if (reg.status !== 0) {
                 return layer.msg(reg.message)
             }
 
             // 提示注册成功
             layer.msg(reg.message)
             // 模拟点击跳转到登录页面
-            $('#link_login').click()
+            $('#link_login').click() */
         })
     })
 
@@ -69,7 +70,7 @@ $(function () {
         // 发起登录请求
         $.ajax({
             method: 'POST',
-            url: 'http://www.liulongbin.top:3007/api/login',
+            url: '/api/login',
             data: $(this).serialize(),
             success: function (res) {
                 console.log(res);
