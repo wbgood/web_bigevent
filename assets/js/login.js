@@ -46,16 +46,28 @@ $(function () {
         console.log(data);
         // 发起请求
         // $.post('/api/reguser', data, function (reg) {
-        $.post('http://127.0.0.1:8782/bigevent/auth/reg/userName', data, function (reg) {
-            // console.log(reg);
-            /* if (reg.status !== 0) {
-                return layer.msg(reg.message)
-            }
+        // $.post('http://127.0.0.1:8781/auth/reg/userName', JSON.stringify(data), function (reg) {
+        //     // console.log(reg);
+        //     /* if (reg.status !== 0) {
+        //         return layer.msg(reg.message)
+        //     }
 
-            // 提示注册成功
-            layer.msg(reg.message)
-            // 模拟点击跳转到登录页面
-            $('#link_login').click() */
+        //     // 提示注册成功
+        //     layer.msg(reg.message)
+        //     // 模拟点击跳转到登录页面
+        //     $('#link_login').click() */
+        // })
+
+        $.ajax({
+            url:'/auth/reg/userName',
+            type:'POST',
+            data: JSON.stringify(data),
+            dataType: 'json',
+            // ContentType: 'application/json',
+            contentType : 'application/json',
+            success:function(res){
+                console.log(res);
+            }
         })
     })
 

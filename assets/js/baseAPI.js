@@ -8,10 +8,12 @@ $.ajaxPrefilter(function(options) {
     // 本地走网关
     // options.url = '127.0.0.1:8782/bigevent/' + options.url
 
-    // options.url = '127.0.0.1:8781' + options.url
-    options.headers = {
-      'Content-Type': 'application/json'
-    }
+    // options.url = 'http://localhost:8781' + options.url
+
+    options.url = 'http://localhost:8782/bigevent' + options.url
+    // options.headers = {
+    //   'Content-Type': 'application/json'
+    // }
 
     if (options.url.indexOf('/my/') !== -1) {
       options.headers = {
