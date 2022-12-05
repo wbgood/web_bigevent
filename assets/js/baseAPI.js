@@ -15,7 +15,7 @@ $.ajaxPrefilter(function (options) {
   //   'Content-Type': 'application/json'
   // }
 
-  if (options.url.indexOf('/my/') !== -1) {
+  if (options.url.indexOf('/login/') !== -1 || options.url.indexOf('/reg/') !== -1) {
     options.headers = {
       Authorization: localStorage.getItem('token') || ''
     }
