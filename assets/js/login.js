@@ -88,16 +88,17 @@ $(function () {
         console.log('测试登录');
         console.log($(this).serialize().toObject);
         console.log(JSON.stringify($(this).serialize()));
-
+        console.log($(this).serializeObject());
+        var loginData = $(this).serializeObject()
         // 发起登录请求
         $.ajax({
             method: 'POST',
             url: '/auth/login/userName',
-            data: JSON.stringify($(this).serialize()),
+            data: JSON.stringify(loginData),
             dataType: 'json',
             contentType: 'application/json',
             success: function (res) {
-                console.log(res);
+                // console.log(res.data.token);
                 if (res.status !== 20000) {
                     return layer.msg(res.msg)
                 }
