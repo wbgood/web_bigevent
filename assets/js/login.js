@@ -43,7 +43,7 @@ $(function () {
             userName: $('#form_reg [name="username"').val(),
             password: $('#form_reg [name="password"]').val()
         }
-        console.log(data);
+        // console.log(data);
         // 发起请求
         // $.post('/api/reguser', data, function (reg) {
         // $.post('http://127.0.0.1:8781/auth/reg/userName', JSON.stringify(data), function (reg) {
@@ -59,14 +59,23 @@ $(function () {
         // })
 
         $.ajax({
-            url:'/auth/reg/userName',
-            type:'POST',
+            url: '/auth/reg/userName',
+            type: 'POST',
             data: JSON.stringify(data),
             dataType: 'json',
             // ContentType: 'application/json',
-            contentType : 'application/json',
-            success:function(res){
-                console.log(res);
+            contentType: 'application/json',
+            success: function (res) {
+                // console.log(res);
+                if (res.status !== 20000) {
+                    return layer.msg(res.msg)
+                }
+
+                // console.log(123);
+                layer.msg(res.msg)
+                //模拟点击跳转到登录页面
+                $('#link_login').click()
+
             }
         })
     })
@@ -77,21 +86,24 @@ $(function () {
         // 阻止表单的默认提交行为
         e.preventDefault()
         console.log('测试登录');
-        console.log($(this).serialize());
+        console.log($(this).serialize().toObject);
+        console.log(JSON.stringify($(this).serialize()));
 
         // 发起登录请求
         $.ajax({
             method: 'POST',
-            url: '/api/login',
-            data: $(this).serialize(),
+            url: '/auth/login/userName',
+            data: JSON.stringify($(this).serialize()),
+            dataType: 'json',
+            contentType: 'application/json',
             success: function (res) {
                 console.log(res);
-                if (res.status !== 0) {
-                    return layer.msg(res.message)
+                if (res.status !== 20000) {
+                    return layer.msg(res.msg)
                 }
-                layer.msg(res.message)
+                layer.msg(res.msg)
                 // 将token存到本地
-                localStorage.setItem('token', res.token)
+                localStorage.setItem('token', res.data.token)
                 // 跳转到首页
                 location.href = '/index.html'
             }
