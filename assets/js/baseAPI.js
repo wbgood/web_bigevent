@@ -15,11 +15,24 @@ $.ajaxPrefilter(function (options) {
   //   'Content-Type': 'application/json'
   // }
 
-  if (options.url.indexOf('/login/') !== -1 || options.url.indexOf('/reg/') !== -1) {
+  // 含my的请求路径需要鉴权,把token存到请求头中
+  if (options.url.indexOf('/my/') !== -1) {
     options.headers = {
       Authorization: localStorage.getItem('token') || ''
     }
   }
+
+  // 全局的同一鉴权,当鉴权接口鉴权失败时跳转到登录页
+  // code 444 为此项目token鉴权失败专用
+  options.complete = function(res) {
+  //  console.log(res);
+  if (res.responseJSON.code === 444) {
+    // console.log(res.responseJSON.msg);
+    location.href = '/login.html'
+  }
+  }
+
+
 
 
 })

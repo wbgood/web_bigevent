@@ -85,10 +85,10 @@ $(function () {
     $('#form_login').submit(function (e) {
         // 阻止表单的默认提交行为
         e.preventDefault()
-        console.log('测试登录');
-        console.log($(this).serialize().toObject);
-        console.log(JSON.stringify($(this).serialize()));
-        console.log($(this).serializeObject());
+        // console.log('测试登录');
+        // console.log($(this).serialize().toObject);
+        // console.log(JSON.stringify($(this).serialize()));
+        // console.log($(this).serializeObject());
         var loginData = $(this).serializeObject()
         // 发起登录请求
         $.ajax({
@@ -98,7 +98,9 @@ $(function () {
             dataType: 'json',
             contentType: 'application/json',
             success: function (res) {
-                // console.log(res.data.token);
+                // console.log(111);
+                // console.log(111);
+                // console.log(112);
                 if (res.status !== 20000) {
                     return layer.msg(res.msg)
                 }
@@ -107,6 +109,10 @@ $(function () {
                 localStorage.setItem('token', res.data.token)
                 // 跳转到首页
                 location.href = '/index.html'
+            },
+            error: function(res){
+                // console.log(res.responseJSON.code);
+                // console.log(res);
             }
         })
     })
