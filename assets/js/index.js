@@ -1,20 +1,7 @@
 $(function () {
     
     var layer = layui.layer
-    function getUserInfo() {
-        // 获取用户信息
-        $.ajax({
-            method: 'GET',
-            url: '/auth/my/getuserinfo',
-            success: function (res) {
-                // console.log(res);
-                if (res.status !== 20000) {
-                    return layer.msg(res.message)
-                }
-                renderAvatar(res.data)
-            }
-        })
-    }
+
     
     getUserInfo()
     var fale = '/auth/api/getuserinfo'.indexOf('/login/')
@@ -64,4 +51,19 @@ function renderAvatar(user) {
     }
 
 
+}
+
+function getUserInfo() {
+    // 获取用户信息
+    $.ajax({
+        method: 'GET',
+        url: '/auth/my/getuserinfo',
+        success: function (res) {
+            // console.log(res);
+            if (res.status !== 20000) {
+                return layer.msg(res.message)
+            }
+            renderAvatar(res.data)
+        }
+    })
 }
