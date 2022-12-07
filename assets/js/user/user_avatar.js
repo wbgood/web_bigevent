@@ -41,7 +41,7 @@ $(function () {
             })
             .toDataURL('image/png')       // 将 Canvas 画布上的内容，转化为 base64 格式的字符串
         var data = {
-            'userPic':dataURL
+            'userPic': dataURL
         }
         // 发请求
         $.ajax({
@@ -55,6 +55,8 @@ $(function () {
                     return layer.msg(res.msg)
                 }
                 layer.msg(res.msg)
+                // 调用父级的方法,跟新userinfo显示数据
+                window.parent.getUserInfo()
             }
         })
     })
