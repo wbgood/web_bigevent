@@ -20,9 +20,7 @@ $(function () {
         layer.confirm('确定退出登录?', { icon: 3, title: '提示' }, function (index) {
             //do something
             // 1. 清空本地存储中的 token
-            localStorage.removeItem('token')
-            // 2. 重新跳转到登录页面
-            location.href = '/login.html'
+            logout()
 
             // 关闭 confirm 询问框
             layer.close(index)
@@ -43,7 +41,7 @@ function renderAvatar(user) {
     // 头像处理
     if (user.userPic !== null) {
         $('.text-avatar').hide()
-        $('.layui-nav-img').attr('src', user.user_pic).show()
+        $('.layui-nav-img').attr('src', user.userPic).show()
     } else {
         $('.layui-nav-img').hide()
         var imgStr = username[0].toUpperCase()
@@ -66,4 +64,11 @@ function getUserInfo() {
             renderAvatar(res.data)
         }
     })
+}
+
+
+function logout() {
+    localStorage.removeItem('token')
+    // 2. 重新跳转到登录页面
+    location.href = '/login.html'
 }

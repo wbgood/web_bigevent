@@ -52,7 +52,8 @@ $(function () {
                 if (res.status !== 20000) {
                     layer.msg(res.msg)
                 }
-                // 调用父级的方法
+                layer.msg(res.msg)
+                // 调用父级的方法,跟新userinfo显示数据
                 window.parent.getUserInfo()
             }
         })
